@@ -283,23 +283,26 @@ class Game {
     var consonants = ['y', 'q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
     function generate_name(): String {
         var name = "";
-        var consonant_first = Random.bool();
-        if (consonant_first) {
-            name += consonants[Random.int(0, consonants.length - 1)];
-            name += vowels[Random.int(0, vowels.length - 1)];
-        } else {
-            name += vowels[Random.int(0, vowels.length - 1)];
-            name += consonants[Random.int(0, consonants.length - 1)];
+        while (animal_names.indexOf(name) != -1 || plant_names.indexOf(name) != -1 || name == "") {
+            var consonant_first = Random.bool();
+            if (consonant_first) {
+                name += consonants[Random.int(0, consonants.length - 1)];
+                name += vowels[Random.int(0, vowels.length - 1)];
+            } else {
+                name += vowels[Random.int(0, vowels.length - 1)];
+                name += consonants[Random.int(0, consonants.length - 1)];
+            }
+            consonant_first = Random.bool();
+            if (consonant_first) {
+                name += consonants[Random.int(0, consonants.length - 1)];
+                name += vowels[Random.int(0, vowels.length - 1)];
+            } else {
+                name += vowels[Random.int(0, vowels.length - 1)];
+                name += consonants[Random.int(0, consonants.length - 1)];
+            }
+            name = name.toUpperCase();
         }
-        consonant_first = Random.bool();
-        if (consonant_first) {
-            name += consonants[Random.int(0, consonants.length - 1)];
-            name += vowels[Random.int(0, vowels.length - 1)];
-        } else {
-            name += vowels[Random.int(0, vowels.length - 1)];
-            name += consonants[Random.int(0, consonants.length - 1)];
-        }
-        return name.toUpperCase();
+        return name;
     }
 
     function generate_map(x_start: Int, x_end: Int, y_start: Int, y_end: Int, initial_chance: Float = 0.45): Vector<Vector<Bool>> {
@@ -670,7 +673,7 @@ class Game {
                     Std.int(Math.max(0, y - 10)), Std.int(Math.min(map_width, y + 10)), 
                     0.3);
 
-                var name = fusion_first.name.substr(0, 2) + fusion_second.name.substr(2, 2); 
+                var name = generate_name(); 
                 var avg_hp_max = Std.int((fusion_first.hp_max + fusion_second.hp_max) / 2);
                 var hp_max = Random.int(Std.int(avg_hp_max * 0.8), Std.int(avg_hp_max * 1.25));
                 var avg_action_timer_max = Std.int((fusion_first.action_timer_max + fusion_second.action_timer_max) / 2);
