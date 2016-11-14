@@ -556,7 +556,7 @@ class Game {
 
         if (current_spell == "FUSE") {
             Text.display(510, fusion_y, "FUSION");
-            if (mana >= 10) {
+            if (mana < 10) {
                 Text.display(510, fusion_y + 30, "Not enough mana");
             } else {
                 switch (fusion_stage) {
