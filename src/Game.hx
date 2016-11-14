@@ -70,7 +70,7 @@ class Game {
     static inline var spells_y = 400;
     static inline var fusion_y = 300;
     static inline var devotees_y = 130;
-    static inline var plant_hp_max = 50; //50
+    static inline var plant_hp_max = 25;
 
     var fusion_first = new Entity(-1, -1);
     var fusion_second = new Entity(-1, -1);
